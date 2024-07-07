@@ -12,7 +12,7 @@ import shutil
 
 
 app = FastAPI()
-# models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(bind=engine)
 
 
 origins = [
