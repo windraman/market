@@ -14,7 +14,7 @@
         <div class="card" style="width: 18rem">
           <img
             class="card-img-top"
-            v-bind:src="`/src/assets/images/product-item${slide.id}.jpg`"
+            v-bind:src="slide.picture"
             alt="Card image cap"
           />
           <div class="card-body">
