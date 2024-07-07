@@ -5,7 +5,7 @@ from database import engine,Base, SessionLocal
 from httpx import AsyncClient
 from starlette import status
 from inline_snapshot import snapshot
-from dirty_equals import IsStr, IsUUID, IsNumeric, IsList, IsJson, IsInt, IsDate, IsFloat
+from dirty_equals import IsStr, IsUUID, IsNumeric, IsList, IsJson, IsInt
 from pydantic import EmailStr
 
 client = TestClient(app)
