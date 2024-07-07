@@ -38,6 +38,7 @@
   </div>
 </template>
 <script>
+import StarRating from "vue-star-rating";
 export default {
   data() {
     return {
@@ -47,6 +48,9 @@ export default {
       userid: 0,
       product_id: 0,
     };
+  },
+  components: {
+    StarRating,
   },
   props: {
     title: String,

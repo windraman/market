@@ -13,6 +13,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-vue": "^2.23.1",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.18.0",
     "vue-router": "^3.0.1",
     "vue-star-rating": "^1.7.0"
   },

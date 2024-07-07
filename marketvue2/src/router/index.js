@@ -4,6 +4,7 @@ import Splash from '../components/Splash.vue'
 import SignIn from '../components/SignIn.vue'
 import Home from '../components/Home.vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import VModal from 'vue-js-modal'
 
 
 // Import Bootstrap and BootstrapVue CSS files (order is important)
@@ -15,6 +16,7 @@ Vue.use(Router)
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VModal, { componentName: 'Timbul' })
 
 
 export default new Router({
