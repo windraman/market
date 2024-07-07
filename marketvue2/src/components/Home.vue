@@ -23,16 +23,17 @@
             <h3>Rp. {{ slide.price }}</h3>
             <small class="card-text">{{ slide.description }}</small>
             <div class="card-text">
-              <label for="rating">Rating:</label>
-              <star-rating
-                style="margin: auto"
-                :increment="0.5"
-                :star-size="20"
-                v-model="slide.rating"
-                v-bind:id="slide.id"
-                :disableClick="true"
-                :show-rating="false"
-              ></star-rating>
+              <div style="margin-left: 80px">
+                <star-rating
+                  style="margin: auto"
+                  :increment="0.5"
+                  :star-size="20"
+                  v-model="slide.rating"
+                  v-bind:id="slide.id"
+                  :disableClick="true"
+                  :show-rating="false"
+                ></star-rating>
+              </div>
             </div>
             <br />
             <button
@@ -49,15 +50,16 @@
     </carousel>
     <Timbul name="example">This is an example</Timbul>
     <!-- <popup-rate></popup-rate> -->
-    <Timbul name="popup" style="height: auto">
+    <Timbul name="popup">
       <div class="card">
         <div class="card-header">Rating</div>
         <div class="card-body">
           <star-rating
-            style="margin: auto"
+            style="margin-left: 30%"
             :increment="0.5"
             :star-size="40"
             :show-rating="true"
+            @rating-selected="setRating"
           ></star-rating>
         </div>
       </div>
@@ -74,11 +76,14 @@ export default {
   name: "Home",
   username: "",
   useritem: {},
+
   data() {
     return {
       slides: [],
       showModal: false,
       selectedSlide: 0,
+      user_id: 0,
+      selectedProductId: 0,
     };
   },
   components: {
@@ -90,6 +95,7 @@ export default {
   created() {
     this.useritem = JSON.parse(sessionStorage.getItem("user"));
     this.username = this.useritem.name;
+    this.user_id = this.useritem.id;
   },
   methods: {
     getProduk: async function () {
@@ -111,6 +117,32 @@ export default {
       sessionStorage.setItem("product_id", 0);
       sessionStorage.setItem("user", "");
       window.location.href = "/";
+    },
+    setRating: async function (rating) {
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+          product_id: this.selectedProductId,
+          user_id: this.user_id,
+          rate: rating,
+        }),
+      };
+      await fetch("http://127.0.0.1:8000/rating", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          if (data > 0) {
+            sessionStorage.setItem("user", JSON.stringify(data));
+            this.$router.push({ name: "Home" });
+          }
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
     },
   },
   mounted: function () {
